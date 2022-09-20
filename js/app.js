@@ -119,12 +119,6 @@
           }, t);
       }
     };
-  document.addEventListener("click", function (t) {
-    t.target.classList.contains("header") &&
-      (document.documentElement.classList.remove("menu-open"),
-      i(),
-      document.documentElement.classList.remove("menu-open"));
-  });
   function r(t) {
     setTimeout(() => {
       window.FLS && console.log(t);
@@ -171,6 +165,12 @@
         );
     }
   }
+  document.addEventListener("click", function (t) {
+    t.target.classList.contains("header") &&
+      (document.documentElement.classList.remove("menu-open"),
+      i(),
+      document.documentElement.classList.remove("menu-open"));
+  });
   let c = (t, e = !1, o = 500, n = 0) => {
       const s = document.querySelector(t);
       if (s) {
