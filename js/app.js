@@ -119,12 +119,12 @@
           }, t);
       }
     };
-  function r(t) {
+  function a(t) {
     setTimeout(() => {
       window.FLS && console.log(t);
     }, 0);
   }
-  function a(t, e) {
+  function r(t, e) {
     const o = Array.from(t).filter(function (t, o, n) {
       if (t.dataset[e]) return t.dataset[e].split(",")[0];
     });
@@ -156,10 +156,10 @@
               n = o[1],
               i = o[2],
               l = window.matchMedia(o[0]),
-              r = t.filter(function (t) {
+              a = t.filter(function (t) {
                 if (t.value === n && t.type === i) return !0;
               });
-            s.push({ itemsArray: r, matchMedia: l });
+            s.push({ itemsArray: a, matchMedia: l });
           }),
           s
         );
@@ -171,67 +171,37 @@
       i(),
       document.documentElement.classList.remove("menu-open"));
   });
-  let c = (t, e = !1, o = 500, n = 0) => {
-      const s = document.querySelector(t);
-      if (s) {
-        let l = "",
-          a = 0;
-        e &&
-          ((l = "header.header"), (a = document.querySelector(l).offsetHeight));
-        let c = {
-          speedAsDuration: !0,
-          speed: o,
-          header: l,
-          offset: n,
-          easing: "easeOutQuad",
-        };
-        if (
-          (document.documentElement.classList.contains("menu-open") &&
-            (i(), document.documentElement.classList.remove("menu-open")),
-          "undefined" != typeof SmoothScroll)
-        )
-          new SmoothScroll().animateScroll(s, "", c);
-        else {
-          let t = s.getBoundingClientRect().top + scrollY;
-          window.scrollTo({ top: a ? t - a : t, behavior: "smooth" });
-        }
-        r(`[gotoBlock]: Юхуу...едем к ${t}`);
-      } else r(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${t}`);
-    },
-    d = !1;
-  setTimeout(() => {
-    if (d) {
-      let t = new Event("windowScroll");
-      window.addEventListener("scroll", function (e) {
-        document.dispatchEvent(t);
-      });
-    }
-  }, 0);
-  const u = () => {
-    const t = document.querySelector("#popup");
-    let e = !0;
-    t &&
-      (document.documentElement.addEventListener("mouseout", function (o) {
-        o.pageY - window.pageYOffset < 0 &&
-          e &&
-          ((e = !1),
-          document.documentElement.classList.add("lock"),
-          document.body.classList.add("bg-show-popap"),
-          t.classList.add("show"));
-      }),
-      t.addEventListener("click", function (e) {
-        let o = e.target;
-        o.closest(".popup__close") &&
-          (document.documentElement.classList.remove("lock"),
-          document.body.classList.remove("bg-show-popap"),
-          t.classList.remove("show")),
-          o.closest(".popup__wrapper") ||
+  const c = (t, e) => {
+      const o = document.querySelector(t);
+      o &&
+        (document.documentElement.classList.add("lock"),
+        document.body.classList.add("bg-show-popap"),
+        o.classList.add("show"),
+        o.addEventListener("click", function (t) {
+          let n = t.target;
+          n.closest(".popup__close") &&
             (document.documentElement.classList.remove("lock"),
             document.body.classList.remove("bg-show-popap"),
-            t.classList.remove("show"));
-      }));
-  };
-  class m {
+            o.classList.remove("show"),
+            (e.isModalShow = !1)),
+            n.closest(".popup__wrapper") ||
+              (document.documentElement.classList.remove("lock"),
+              document.body.classList.remove("bg-show-popap"),
+              o.classList.remove("show"),
+              (e.isModalShow = !1));
+        }));
+    },
+    d = (t) => {
+      let e = {},
+        o = t;
+      history.pushState({}, "", location.href),
+        window.addEventListener("popstate", function () {
+          e.isModalShow
+            ? (location.href = o)
+            : (c("#popup", e), (e.isModalShow = !0));
+        });
+    };
+  class u {
     constructor(t, e, o) {
       (this._deadline = t),
         (this._cbChange = e),
@@ -261,12 +231,12 @@
         o = t > 0 ? Math.floor(t / 1e3) % 60 : 0;
       (this._out.minutes = e < 10 ? "0" + e : e),
         (this._out.seconds = o < 10 ? "0" + o : o),
-        (this._out.minutesTitle = m.declensionNum(e, [
+        (this._out.minutesTitle = u.declensionNum(e, [
           "минута",
           "минуты",
           "минут",
         ])),
-        (this._out.secondsTitle = m.declensionNum(o, [
+        (this._out.secondsTitle = u.declensionNum(o, [
           "секунда",
           "секунды",
           "секунд",
@@ -277,12 +247,12 @@
           this._cbComplete && this._cbComplete());
     }
   }
-  const h = () => {
+  const m = () => {
       const t = document.querySelector(".timer .timer__minutes"),
         e = document.querySelector(".timer .timer__seconds"),
         o = new Date(Date.now() + 600999);
       t &&
-        new m(
+        new u(
           o,
           (o) => {
             (t.textContent = o.minutes),
@@ -296,7 +266,7 @@
           }
         );
     },
-    p = () => {
+    h = () => {
       let t = document.querySelectorAll("input[data-tel-input]"),
         e = function (t) {
           return t.value.replace(/\D/g, "");
@@ -338,7 +308,7 @@
           e.addEventListener("input", n, !1),
           e.addEventListener("paste", o, !1);
     },
-    f = () => {
+    p = () => {
       const t = document.querySelectorAll("form");
       if (t) {
         async function e(t, e) {
@@ -365,7 +335,43 @@
         });
       }
     };
-  (window.FLS = !1),
+  let f = (t, e = !1, o = 500, n = 0) => {
+      const s = document.querySelector(t);
+      if (s) {
+        let l = "",
+          r = 0;
+        e &&
+          ((l = "header.header"), (r = document.querySelector(l).offsetHeight));
+        let c = {
+          speedAsDuration: !0,
+          speed: o,
+          header: l,
+          offset: n,
+          easing: "easeOutQuad",
+        };
+        if (
+          (document.documentElement.classList.contains("menu-open") &&
+            (i(), document.documentElement.classList.remove("menu-open")),
+          "undefined" != typeof SmoothScroll)
+        )
+          new SmoothScroll().animateScroll(s, "", c);
+        else {
+          let t = s.getBoundingClientRect().top + scrollY;
+          window.scrollTo({ top: r ? t - r : t, behavior: "smooth" });
+        }
+        a(`[gotoBlock]: Юхуу...едем к ${t}`);
+      } else a(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${t}`);
+    },
+    g = !1;
+  setTimeout(() => {
+    if (g) {
+      let t = new Event("windowScroll");
+      window.addEventListener("scroll", function (e) {
+        document.dispatchEvent(t);
+      });
+    }
+  }, 0),
+    (window.FLS = !1),
     t.any() && document.documentElement.classList.add("touch"),
     (function () {
       let t = document.querySelector(".icon-menu"),
@@ -386,17 +392,17 @@
           return !t.dataset.spollers.split(",")[0];
         });
         n.length && i(n);
-        let s = a(t, "spollers");
+        let s = r(t, "spollers");
         function i(t, e = !1) {
           t.forEach((t) => {
             (t = e ? t.item : t),
               e.matches || !e
                 ? (t.classList.add("_spoller-init"),
                   l(t),
-                  t.addEventListener("click", r))
+                  t.addEventListener("click", a))
                 : (t.classList.remove("_spoller-init"),
                   l(t, !1),
-                  t.removeEventListener("click", r));
+                  t.removeEventListener("click", a));
           });
         }
         function l(t, e = !0) {
@@ -411,7 +417,7 @@
                   (t.nextElementSibling.hidden = !1));
             });
         }
-        function r(t) {
+        function a(t) {
           const n = t.target;
           if (n.closest("[data-spoller]")) {
             const s = n.closest("[data-spoller]"),
@@ -451,7 +457,7 @@
               n = o.dataset.goto ? o.dataset.goto : "",
               s = !!o.hasAttribute("data-goto-header"),
               i = o.dataset.gotoSpeed ? o.dataset.gotoSpeed : "500";
-            c(n, s, i), t.preventDefault();
+            f(n, s, i), t.preventDefault();
           }
         } else if ("watcherCallback" === t.type && t.detail) {
           const e = t.detail.entry,
@@ -471,7 +477,7 @@
         document.addEventListener("watcherCallback", t);
     })(),
     (function () {
-      d = !0;
+      g = !0;
       const t = document.querySelector("header.header"),
         e = t.hasAttribute("data-scroll-show"),
         o = t.dataset.scrollShow ? t.dataset.scrollShow : 500,
@@ -479,13 +485,13 @@
       let s,
         i = 0;
       document.addEventListener("windowScroll", function (l) {
-        const r = window.scrollY;
+        const a = window.scrollY;
         clearTimeout(s),
-          r >= n
+          a >= n
             ? (!t.classList.contains("_header-scroll") &&
                 t.classList.add("_header-scroll"),
               e &&
-                (r > i
+                (a > i
                   ? t.classList.contains("_header-show") &&
                     t.classList.remove("_header-show")
                   : !t.classList.contains("_header-show") &&
@@ -499,10 +505,10 @@
               e &&
                 t.classList.contains("_header-show") &&
                 t.classList.remove("_header-show")),
-          (i = r <= 0 ? 0 : r);
+          (i = a <= 0 ? 0 : a);
       });
     })(),
-    (d = !0),
+    (g = !0),
     (function () {
       const t = document.querySelectorAll("[data-sticky]");
       t.length &&
@@ -526,7 +532,7 @@
                 t.getBoundingClientRect().top +
                 scrollY -
                 (n + o.offsetHeight + e.bottom);
-              let r = {
+              let a = {
                 position: "relative",
                 bottom: "auto",
                 top: "0px",
@@ -535,26 +541,26 @@
               };
               n + e.bottom + o.offsetHeight < window.innerHeight &&
                 (scrollY >= s && scrollY <= l
-                  ? ((r.position = "fixed"),
-                    (r.bottom = "auto"),
-                    (r.top = `${n}px`),
-                    (r.left = `${o.getBoundingClientRect().left}px`),
-                    (r.width = `${o.offsetWidth}px`))
+                  ? ((a.position = "fixed"),
+                    (a.bottom = "auto"),
+                    (a.top = `${n}px`),
+                    (a.left = `${o.getBoundingClientRect().left}px`),
+                    (a.width = `${o.offsetWidth}px`))
                   : scrollY >= l &&
-                    ((r.position = "absolute"),
-                    (r.bottom = `${e.bottom}px`),
-                    (r.top = "auto"),
-                    (r.left = "0px"),
-                    (r.width = `${o.offsetWidth}px`))),
+                    ((a.position = "absolute"),
+                    (a.bottom = `${e.bottom}px`),
+                    (a.top = "auto"),
+                    (a.left = "0px"),
+                    (a.width = `${o.offsetWidth}px`))),
                 (function (t, e) {
                   t.style.cssText = `position:${e.position};bottom:${e.bottom};top:${e.top};left:${e.left};width:${e.width};`;
-                })(o, r);
+                })(o, a);
             });
           })(t, e);
         });
     })(),
-    u(),
+    d("https://ya.ru"),
+    m(),
     h(),
-    p(),
-    f();
+    p();
 })();
