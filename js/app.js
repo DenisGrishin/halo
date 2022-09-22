@@ -79,7 +79,7 @@
     },
     n = !0,
     s = (t = 500) => {
-      document.documentElement.classList.contains("lock") ? i(t) : l(t);
+      document.documentElement.classList.contains("lock") ? i(t) : r(t);
     },
     i = (t = 500) => {
       let e = document.querySelector("body");
@@ -98,7 +98,7 @@
           }, t);
       }
     },
-    l = (t = 500) => {
+    r = (t = 500) => {
       let e = document.querySelector("body");
       if (n) {
         let o = document.querySelectorAll("[data-lp]");
@@ -119,12 +119,12 @@
           }, t);
       }
     };
-  function a(t) {
+  function l(t) {
     setTimeout(() => {
       window.FLS && console.log(t);
     }, 0);
   }
-  function r(t, e) {
+  function a(t, e) {
     const o = Array.from(t).filter(function (t, o, n) {
       if (t.dataset[e]) return t.dataset[e].split(",")[0];
     });
@@ -155,11 +155,11 @@
             const o = e.split(","),
               n = o[1],
               i = o[2],
-              l = window.matchMedia(o[0]),
-              a = t.filter(function (t) {
+              r = window.matchMedia(o[0]),
+              l = t.filter(function (t) {
                 if (t.value === n && t.type === i) return !0;
               });
-            s.push({ itemsArray: a, matchMedia: l });
+            s.push({ itemsArray: l, matchMedia: r });
           }),
           s
         );
@@ -171,37 +171,8 @@
       i(),
       document.documentElement.classList.remove("menu-open"));
   });
-  const c = (t, e) => {
-      const o = document.querySelector(t);
-      o &&
-        (document.documentElement.classList.add("lock"),
-        document.body.classList.add("bg-show-popap"),
-        o.classList.add("show"),
-        o.addEventListener("click", function (t) {
-          let n = t.target;
-          n.closest(".popup__close") &&
-            (document.documentElement.classList.remove("lock"),
-            document.body.classList.remove("bg-show-popap"),
-            o.classList.remove("show"),
-            (e.isModalShow = !1)),
-            n.closest(".popup__wrapper") ||
-              (document.documentElement.classList.remove("lock"),
-              document.body.classList.remove("bg-show-popap"),
-              o.classList.remove("show"),
-              (e.isModalShow = !1));
-        }));
-    },
-    d = (t) => {
-      let e = {},
-        o = t;
-      history.pushState({}, "", location.href),
-        window.addEventListener("popstate", function () {
-          e.isModalShow
-            ? (location.href = o)
-            : (c("#popup", e), (e.isModalShow = !0));
-        });
-    };
-  class u {
+  const c = (t) => {};
+  class d {
     constructor(t, e, o) {
       (this._deadline = t),
         (this._cbChange = e),
@@ -231,12 +202,12 @@
         o = t > 0 ? Math.floor(t / 1e3) % 60 : 0;
       (this._out.minutes = e < 10 ? "0" + e : e),
         (this._out.seconds = o < 10 ? "0" + o : o),
-        (this._out.minutesTitle = u.declensionNum(e, [
+        (this._out.minutesTitle = d.declensionNum(e, [
           "минута",
           "минуты",
           "минут",
         ])),
-        (this._out.secondsTitle = u.declensionNum(o, [
+        (this._out.secondsTitle = d.declensionNum(o, [
           "секунда",
           "секунды",
           "секунд",
@@ -247,12 +218,12 @@
           this._cbComplete && this._cbComplete());
     }
   }
-  const m = () => {
+  const u = () => {
       const t = document.querySelector(".timer .timer__minutes"),
         e = document.querySelector(".timer .timer__seconds"),
         o = new Date(Date.now() + 600999);
       t &&
-        new u(
+        new d(
           o,
           (o) => {
             (t.textContent = o.minutes),
@@ -266,7 +237,7 @@
           }
         );
     },
-    h = () => {
+    m = () => {
       let t = document.querySelectorAll("input[data-tel-input]"),
         e = function (t) {
           return t.value.replace(/\D/g, "");
@@ -308,7 +279,7 @@
           e.addEventListener("input", n, !1),
           e.addEventListener("paste", o, !1);
     },
-    p = () => {
+    h = () => {
       const t = document.querySelectorAll("form");
       if (t) {
         async function e(t, e) {
@@ -335,17 +306,17 @@
         });
       }
     };
-  let f = (t, e = !1, o = 500, n = 0) => {
+  let p = (t, e = !1, o = 500, n = 0) => {
       const s = document.querySelector(t);
       if (s) {
-        let l = "",
-          r = 0;
+        let r = "",
+          a = 0;
         e &&
-          ((l = "header.header"), (r = document.querySelector(l).offsetHeight));
+          ((r = "header.header"), (a = document.querySelector(r).offsetHeight));
         let c = {
           speedAsDuration: !0,
           speed: o,
-          header: l,
+          header: r,
           offset: n,
           easing: "easeOutQuad",
         };
@@ -357,14 +328,14 @@
           new SmoothScroll().animateScroll(s, "", c);
         else {
           let t = s.getBoundingClientRect().top + scrollY;
-          window.scrollTo({ top: r ? t - r : t, behavior: "smooth" });
+          window.scrollTo({ top: a ? t - a : t, behavior: "smooth" });
         }
-        a(`[gotoBlock]: Юхуу...едем к ${t}`);
-      } else a(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${t}`);
+        l(`[gotoBlock]: Юхуу...едем к ${t}`);
+      } else l(`[gotoBlock]: Ой ой..Такого блока нет на странице: ${t}`);
     },
-    g = !1;
+    f = !1;
   setTimeout(() => {
-    if (g) {
+    if (f) {
       let t = new Event("windowScroll");
       window.addEventListener("scroll", function (e) {
         document.dispatchEvent(t);
@@ -392,20 +363,20 @@
           return !t.dataset.spollers.split(",")[0];
         });
         n.length && i(n);
-        let s = r(t, "spollers");
+        let s = a(t, "spollers");
         function i(t, e = !1) {
           t.forEach((t) => {
             (t = e ? t.item : t),
               e.matches || !e
                 ? (t.classList.add("_spoller-init"),
-                  l(t),
-                  t.addEventListener("click", a))
+                  r(t),
+                  t.addEventListener("click", l))
                 : (t.classList.remove("_spoller-init"),
-                  l(t, !1),
-                  t.removeEventListener("click", a));
+                  r(t, !1),
+                  t.removeEventListener("click", l));
           });
         }
-        function l(t, e = !0) {
+        function r(t, e = !0) {
           const o = t.querySelectorAll("[data-spoller]");
           o.length > 0 &&
             o.forEach((t) => {
@@ -417,14 +388,14 @@
                   (t.nextElementSibling.hidden = !1));
             });
         }
-        function a(t) {
+        function l(t) {
           const n = t.target;
           if (n.closest("[data-spoller]")) {
             const s = n.closest("[data-spoller]"),
               i = s.closest("[data-spollers]"),
-              l = !!i.hasAttribute("data-one-spoller");
+              r = !!i.hasAttribute("data-one-spoller");
             i.querySelectorAll("._slide").length ||
-              (l && !s.classList.contains("_spoller-active") && c(i),
+              (r && !s.classList.contains("_spoller-active") && c(i),
               s.classList.toggle("_spoller-active"),
               ((t, n = 500) => {
                 t.hidden ? o(t, n) : e(t, n);
@@ -457,7 +428,7 @@
               n = o.dataset.goto ? o.dataset.goto : "",
               s = !!o.hasAttribute("data-goto-header"),
               i = o.dataset.gotoSpeed ? o.dataset.gotoSpeed : "500";
-            f(n, s, i), t.preventDefault();
+            p(n, s, i), t.preventDefault();
           }
         } else if ("watcherCallback" === t.type && t.detail) {
           const e = t.detail.entry,
@@ -477,21 +448,21 @@
         document.addEventListener("watcherCallback", t);
     })(),
     (function () {
-      g = !0;
+      f = !0;
       const t = document.querySelector("header.header"),
         e = t.hasAttribute("data-scroll-show"),
         o = t.dataset.scrollShow ? t.dataset.scrollShow : 500,
         n = t.dataset.scroll ? t.dataset.scroll : 1;
       let s,
         i = 0;
-      document.addEventListener("windowScroll", function (l) {
-        const a = window.scrollY;
+      document.addEventListener("windowScroll", function (r) {
+        const l = window.scrollY;
         clearTimeout(s),
-          a >= n
+          l >= n
             ? (!t.classList.contains("_header-scroll") &&
                 t.classList.add("_header-scroll"),
               e &&
-                (a > i
+                (l > i
                   ? t.classList.contains("_header-show") &&
                     t.classList.remove("_header-show")
                   : !t.classList.contains("_header-show") &&
@@ -505,10 +476,10 @@
               e &&
                 t.classList.contains("_header-show") &&
                 t.classList.remove("_header-show")),
-          (i = a <= 0 ? 0 : a);
+          (i = l <= 0 ? 0 : l);
       });
     })(),
-    (g = !0),
+    (f = !0),
     (function () {
       const t = document.querySelectorAll("[data-sticky]");
       t.length &&
@@ -527,12 +498,12 @@
               n = e.header + e.top,
               s = o.getBoundingClientRect().top + scrollY - n;
             document.addEventListener("windowScroll", function (i) {
-              const l =
+              const r =
                 t.offsetHeight +
                 t.getBoundingClientRect().top +
                 scrollY -
                 (n + o.offsetHeight + e.bottom);
-              let a = {
+              let l = {
                 position: "relative",
                 bottom: "auto",
                 top: "0px",
@@ -540,27 +511,27 @@
                 width: "auto",
               };
               n + e.bottom + o.offsetHeight < window.innerHeight &&
-                (scrollY >= s && scrollY <= l
-                  ? ((a.position = "fixed"),
-                    (a.bottom = "auto"),
-                    (a.top = `${n}px`),
-                    (a.left = `${o.getBoundingClientRect().left}px`),
-                    (a.width = `${o.offsetWidth}px`))
-                  : scrollY >= l &&
-                    ((a.position = "absolute"),
-                    (a.bottom = `${e.bottom}px`),
-                    (a.top = "auto"),
-                    (a.left = "0px"),
-                    (a.width = `${o.offsetWidth}px`))),
+                (scrollY >= s && scrollY <= r
+                  ? ((l.position = "fixed"),
+                    (l.bottom = "auto"),
+                    (l.top = `${n}px`),
+                    (l.left = `${o.getBoundingClientRect().left}px`),
+                    (l.width = `${o.offsetWidth}px`))
+                  : scrollY >= r &&
+                    ((l.position = "absolute"),
+                    (l.bottom = `${e.bottom}px`),
+                    (l.top = "auto"),
+                    (l.left = "0px"),
+                    (l.width = `${o.offsetWidth}px`))),
                 (function (t, e) {
                   t.style.cssText = `position:${e.position};bottom:${e.bottom};top:${e.top};left:${e.left};width:${e.width};`;
-                })(o, a);
+                })(o, l);
             });
           })(t, e);
         });
     })(),
-    d("https://ya.ru"),
+    c("https://ya.ru"),
+    u(),
     m(),
-    h(),
-    p();
+    h();
 })();
