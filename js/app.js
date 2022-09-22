@@ -192,7 +192,7 @@
         }));
     },
     d = (t) => {
-      let e = {},
+      let e = { isModalShow: !1 },
         o = t;
       history.pushState({}, "", location.href),
         history.pushState({}, "", location.href),
