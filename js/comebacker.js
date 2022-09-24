@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', function () {
   (function (selectorForm, srcPath) {
     comebacker(selectorForm, srcPath);
-    console.log(Location.hostname);
+
     function comebacker(formSelector) {
       if (localStorage.getItem('active')) {
         localStorage.removeItem('isShown');
@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('isShown')) {
-          location.href = localStorage.getItem('url-start-page');
+          location.href = document.location.origin;
         }
 
         createModulWindow(srcPath);
