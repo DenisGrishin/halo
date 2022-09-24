@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('isShown')) {
-          location.href = document.location.origin;
+          location.href = localStorage.getItem('url-start-page');
         }
 
         createModulWindow(srcPath);
