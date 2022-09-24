@@ -13,191 +13,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<script>
-		(function (linkBack, srcPath) {
-
-
-			localStorage.setItem('url-start-page', location.href)
-
-			history.pushState({}, '', location.href);
-			history.pushState({}, '', location.href);
-			localStorage.removeItem('isShown');
-			localStorage.removeItem('show');
-
-			window.addEventListener('popstate', function () {
-
-				if (localStorage.getItem('show')) {
-					location.href = linkBack
-					return
-				}
-				if (!localStorage.getItem('active')) {
-					createModulWindow(srcPath, linkBack)
-					localStorage.setItem('show', 'true');
-					return;
-				}
-
-
-			});
-
-			const createModulWindow = (srcPath, linkPath) => {
-				const styleModal = `
-    .modul-bg {
-      padding: 20px;
-      display: none;
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 100000;
-    }
-    
-    .modul-bg.active { 
-      overflow: auto;
-      display: flex;
-      justify-content: center;
-  }
-  .modul-wrapper{
-    padding: 15px;
-		width: 100%;
-		max-width: 600px;
-  }
- 
-  .modul {
-	position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: #fff;
-    padding: 25px;
-    flex-direction: column;
-	 padding: 55px 25px 25px 25px ;
-  }
-  .module-btn-close {
-        font-size: 20px;
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        text-transform: uppercase;
-        font-weight: 700;
-		  color: #000;
-      }
-  .modul-title{
-	line-height: 1.3;
-    font-size: 22px;
-    text-transform: uppercase;
-	font-weight: 700;
-	margin-bottom: 20px;
-	color: #f91155;
-
-	
-  }
-  .modul-img{
-    width: 350px;
-    max-width: 100%;
-	 margin-bottom: 20px;
-  }
-  .modul-link-btn {
-	font-size: 20px;
-	width: 100%;
-	color: #fff;
-	padding: 20px 10px;
-	background-color: #c00;
-	box-shadow: 0 3px 5px #232323;
-	border: 2px solid #c00;
-	transform: translate(0px, 0px);
-	text-transform: uppercase;
-	background-image: -webkit-linear-gradient(45deg, #fff 50%, transparent 50%), 100%;
-	background-image: linear-gradient(45deg, #fff 50%, transparent 50%);
-	background-position: 100%;
-	background-size: 400%;
-	transition: all 0.3s ease-in-out 0s;
-}
-
-@media (any-hover: hover) {
-	.modul-link-btn:hover {
-		transform: translate(0px, 5px);
-		background-position: 0;
-		color: #c00;
-
-	}
-}
-  body {
-    overflow: hidden;
-    touch-action: none;
-  }
-  .bg-show-popap::before {
-	content: "";
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	z-index: 100;
-	left: 0;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-  `;
-				let style = document.createElement('style');
-				const modulBg = document.createElement('div');
-				const modulWrapper = document.createElement('div');
-				const modul = document.createElement('div');
-				const btnClose = document.createElement('button');
-				const titleModul = document.createElement('h1');
-				const imgModul = document.createElement('img');
-				const linkBtn = document.createElement('a')
-
-				modulBg.classList.add('modul-bg');
-				modulWrapper.classList.add('modul-wrapper');
-				modul.classList.add('modul');
-				btnClose.classList.add('module-btn-close');
-				imgModul.classList.add('modul-img');
-				titleModul.classList.add('modul-title');
-				linkBtn.classList.add('modul-link-btn');
-
-
-				imgModul.setAttribute('src', srcPath);
-				linkBtn.setAttribute('href', linkPath)
-
-				btnClose.innerHTML = 'close';
-				style.innerHTML = styleModal;
-				titleModul.innerHTML =
-					'Wait! We have a unique offer for you - 50% discount!';
-				linkBtn.innerHTML = 'Go to view!'
-
-				document.body.appendChild(modulBg);
-				modulBg.appendChild(modulWrapper);
-				modulWrapper.appendChild(modul);
-				modul.appendChild(titleModul);
-				modul.appendChild(imgModul);
-				modul.appendChild(btnClose);
-				modul.appendChild(linkBtn);
-				modulBg.appendChild(style);
-
-				showModal(modulBg, btnClose);
-			};
-
-			function showModal(modulBg, btnClose) {
-				if (modulBg) {
-					modulBg.classList.add('active');
-
-					document.body.classList.add('bg-show-popap');
-					document.addEventListener('click', (e) => {
-						if (e.target === modulBg) {
-							modulBg.classList.remove('active');
-							document.body.classList.remove('bg-show-popap');
-							localStorage.removeItem('show');
-							modulBg.remove();
-						}
-						if (e.target === btnClose) {
-							modulBg.classList.remove('active');
-							document.body.classList.remove('bg-show-popap');
-							localStorage.removeItem('show');
-							modulBg.remove();
-						}
-					});
-				}
-			}
-		})('http://127.0.0.1:5500/home.html', 'http://127.0.0.1:5500/img/main/help-weight/01.jpg')
+		window.addEventListener('load', () => {
+			localStorage.setItem('active', true);
+		})
 	</script>
 </head>
 
@@ -474,10 +292,10 @@
 				</ul>
 			</div>
 		</header>
-		<main class="page">
-			<ol class="rootpage__list" style="margin: 20px 0 0 40px; font: 20px sans-serif;">
-				<li><a href="home.html">Halo!</a></li>
-			</ol>
+		<main class="page-finish">
+
+			<h2 class="page-finish__title">Thanks</h2>
+
 		</main>
 		<footer class="footer">
 			<div class="footer__container">
@@ -539,12 +357,44 @@
 		</footer>
 
 	</div>
+	<div id="popup" class="popup ">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close">Close</button>
+				<div class="popup__text">
+					<h2 class="popup__title title">
+						Wait! We have a unique offer for you - 50% discount!
+					</h2>
+					<div class="popup__product-img ">
+						<img src="img/main/help-weight/product.png" alt="Корица?" />
+						<div class="popup__price product-price product-price_ps">
+							<h5 class="product-price__title">DESCUENTO</h5>
+							<div class="product-price__old">55800COLONES</div>
+							<div class="product-price__new">27900COLONES</div>
+						</div>
+					</div>
 
+					<form action="#" id="form" class=" form-order">
+						<div class="form-order__box-input">
+							<label class="form-order__label" for="">Nome/Cognome</label>
+							<input required autocomplete="off" type="text" name="name-user" placeholder="Alejandro Rodriguez"
+								class="form-order__input" />
+						</div>
+						<div class="form-order__box-input">
+							<label for="" class="form-order__label">Mob.telefono</label>
+							<input data-tel-input required autocomplete="off" type="tel" name="name-tel"
+								placeholder="+506 123456789" class="form-order__input" />
+						</div>
+						<button type="submit" class="form-order__button btn form-order__button_mb">
+							Ordene Biolica con 50% de descuento!
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="js/app.min.js?_v=20220923190009"></script>
-
 </body>
-
-
 
 </html>
