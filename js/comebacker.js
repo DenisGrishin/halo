@@ -13,10 +13,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
       history.pushState({}, '', location.href);
       history.pushState({}, '', location.href);
-
+      let linkBack = localStorage.getItem('url-start-page');
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('isShown')) {
-          location.href = localStorage.getItem('url-start-page');
+          location.href = linkBack;
         }
 
         createModulWindow(srcPath);
