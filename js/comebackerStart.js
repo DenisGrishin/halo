@@ -6,9 +6,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
   (function (linkBack, srcPath, heightImg = 300) {
     localStorage.setItem('url-start-page', location.href);
-
-    document.querySelector('.modul-bg').remove();
-
+  if (document.querySelector('.modul-bg')) {
+      document.querySelector('.modul-bg').remove();
+    }
     history.pushState({}, '', location.href);
     history.pushState({}, '', location.href);
     localStorage.removeItem('show');
