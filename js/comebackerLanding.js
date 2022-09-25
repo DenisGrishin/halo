@@ -15,9 +15,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function comebacker(formSelector) {
       window.addEventListener('load', () => {
-        if (document.querySelector('.modul-bg'))
+        if (document.querySelector('.modul-bg')) {
           console.log(document.querySelector('.modul-bg'));
-        document.querySelector('.modul-bg').remove();
+          document.querySelector('.modul-bg').remove();
+        }
       });
       if (localStorage.getItem('active')) {
         localStorage.removeItem('isShown');
@@ -32,6 +33,7 @@ window.addEventListener('DOMContentLoaded', function () {
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('isShown')) {
           location.href = linkBackPage;
+          return;
         }
 
         createModulWindow(srcPath, heigthImg);
