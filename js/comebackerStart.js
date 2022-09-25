@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', function () {
     history.pushState({}, '', location.href);
     localStorage.removeItem('show');
     localStorage.removeItem('isShown');
-
+    console.log(document.querySelector('.modul-bg'));
     if (!localStorage.getItem('show') && document.querySelector('.modul-bg')) {
       localStorage.removeItem('show');
       document.querySelector('.modul-bg').remove();
