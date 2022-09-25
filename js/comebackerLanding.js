@@ -16,6 +16,7 @@ window.addEventListener('DOMContentLoaded', function () {
     function comebacker(formSelector) {
       if (localStorage.getItem('active')) {
         window.addEventListener('unload ', () => {
+          console.log(document.querySelector('.modul-bg'));
           if (document.querySelector('.modul-bg')) {
             document.querySelector('.modul-bg').remove();
           }
