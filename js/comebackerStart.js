@@ -6,7 +6,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
   (function (linkBack, srcPath, heightImg = 300) {
     localStorage.setItem('url-start-page', location.href);
-    
 
     history.pushState({}, '', location.href);
     history.pushState({}, '', location.href);
@@ -142,6 +141,7 @@ body::before{
       background-color: rgba(0, 0, 0, 1);
     }
 `;
+
       let style = document.createElement('style');
       const modulBg = document.createElement('div');
       const modulWrapper = document.createElement('div');
@@ -158,28 +158,32 @@ body::before{
       imgModul.classList.add('modul-img');
       titleModul.classList.add('modul-title');
       linkBtn.classList.add('modul-link-btn');
+      console.log(modulBg);
+      if (modulBg) {
+        imgModul.setAttribute('src', srcPath);
+        linkBtn.setAttribute('href', linkPath);
 
-      imgModul.setAttribute('src', srcPath);
-      linkBtn.setAttribute('href', linkPath);
+        btnClose.innerHTML = 'close';
+        style.innerHTML = styleModal;
+        titleModul.innerHTML =
+          'Wait! We have a unique offer for you - 50% discount!';
+        linkBtn.innerHTML = 'Go to view!';
 
-      btnClose.innerHTML = 'close';
-      style.innerHTML = styleModal;
-      titleModul.innerHTML =
-        'Wait! We have a unique offer for you - 50% discount!';
-      linkBtn.innerHTML = 'Go to view!';
+        document.body.appendChild(modulBg);
+        modulBg.appendChild(modulWrapper);
+        modulWrapper.appendChild(modul);
+        modul.appendChild(titleModul);
+        modul.appendChild(imgModul);
+        modul.appendChild(btnClose);
+        modul.appendChild(linkBtn);
+        modulBg.appendChild(style);
 
-      document.body.appendChild(modulBg);
-      modulBg.appendChild(modulWrapper);
-      modulWrapper.appendChild(modul);
-      modul.appendChild(titleModul);
-      modul.appendChild(imgModul);
-      modul.appendChild(btnClose);
-      modul.appendChild(linkBtn);
-      modulBg.appendChild(style);
-
-      setTimeout(() => {
-        showModal(modulBg, btnClose, modul);
-      }, 1);
+        setTimeout(() => {
+          showModal(modulBg, btnClose, modul);
+        }, 1);
+      } else {
+        closeModal(modulBg, btnClose, modul);
+      }
     };
 
     function showModal(modulBg, btnClose, modul) {
