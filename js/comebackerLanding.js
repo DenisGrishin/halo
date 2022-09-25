@@ -24,6 +24,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
 
         createModulWindow(srcPath, heigthImg);
+
         localStorage.setItem('showModulWindLed', true);
       });
 
@@ -131,7 +132,7 @@ window.addEventListener('DOMContentLoaded', function () {
         width: 100% !important;
         border: 2px solid #000 !important;
         outline: none !important;
-        background-color: #fff;
+        background-color: #fff !important;
       }
       `;
 
@@ -228,7 +229,7 @@ window.addEventListener('DOMContentLoaded', function () {
     '.form-order',
     'https://funart.pro/uploads/posts/2022-06/1654756218_58-funart-pro-p-samii-malenkii-yezhik-v-mire-zhivotnie-kra-63.jpg',
     '300',
-    'https://denisgrishin.github.io/halo/'
+    'http://127.0.0.1:5500/index.html'
   );
 });
 // 'http://127.0.0.1:5500/index.html'
