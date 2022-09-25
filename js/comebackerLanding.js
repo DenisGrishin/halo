@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', function () {
   // heightImg - если картинка крива показывается поменять значения
   // параметры на самом дне прописывать
 
-  (function (selectorForm, srcPath, heigthImg = '300') {
+  (function (selectorForm, srcPath, heigthImg = '300',linkBack) {
     comebacker(selectorForm, srcPath);
 
     function comebacker(formSelector) {
@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
       let linkBack =
         localStorage.getItem('url-start-page') ||
-        document.location.origin;
+        linkBack;
 
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('isShown')) {
@@ -224,6 +224,6 @@ window.addEventListener('DOMContentLoaded', function () {
   })(
     '.form-order',
     'https://funart.pro/uploads/posts/2022-06/1654756218_58-funart-pro-p-samii-malenkii-yezhik-v-mire-zhivotnie-kra-63.jpg',
-    '300'
+    '300',https://denisgrishin.github.io/halo/
   );
 });
