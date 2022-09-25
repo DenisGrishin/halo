@@ -158,8 +158,8 @@ body::before{
       imgModul.classList.add('modul-img');
       titleModul.classList.add('modul-title');
       linkBtn.classList.add('modul-link-btn');
-      console.log(modulBg);
-      if (modulBg) {
+
+      if (localStorage.getItem('show')) {
         imgModul.setAttribute('src', srcPath);
         linkBtn.setAttribute('href', linkPath);
 
