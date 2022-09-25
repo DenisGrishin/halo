@@ -173,6 +173,7 @@ body::before{
       document.body.appendChild(modulBg);
 
       if (!localStorage.getItem('show') && modulBg) {
+        localStorage.removeItem('show');
         modulBg.remove();
       }
       modulBg.appendChild(modulWrapper);
