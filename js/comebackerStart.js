@@ -13,15 +13,16 @@ window.addEventListener('DOMContentLoaded', function () {
     localStorage.removeItem('isShown');
 
     window.addEventListener('popstate', function () {
+      if (!localStorage.getItem('active')) {
+        return;
+      }
       if (localStorage.getItem('show')) {
         location.href = linkBack;
         return;
       }
-      if (!localStorage.getItem('active')) {
-        createModulWindow(srcPath, linkBack, heightImg);
-        localStorage.setItem('show', 'true');
-        return;
-      }
+
+      createModulWindow(srcPath, linkBack, heightImg);
+      localStorage.setItem('show', 'true');
     });
 
     const createModulWindow = (srcPath, linkPath, heightImg) => {
@@ -183,17 +184,13 @@ body::before{
     };
 
     function showModal(modulBg, btnClose, modul) {
-      if (localStorage.getItem('show')) {
-        let scroll = calcScroll();
+      let scroll = calcScroll();
 
-        modulBg.classList.add('active');
-        modul.classList.add('active');
-        closeModal(modulBg, btnClose, modul);
-        document.body.classList.add('bg-show-modal');
-        document.body.style.paddingRight = `${scroll}px`;
-      } else {
-        closeModal(modulBg, btnClose, modul);
-      }
+      modulBg.classList.add('active');
+      modul.classList.add('active');
+      closeModal(modulBg, btnClose, modul);
+      document.body.classList.add('bg-show-modal');
+      document.body.style.paddingRight = `${scroll}px`;
     }
 
     function closeModal(modulBg, btnClose, modul) {
