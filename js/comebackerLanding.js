@@ -2,13 +2,18 @@ window.addEventListener('DOMContentLoaded', function () {
   // selectorForm - указать селектор или id формы на лендинге
   // srcPath - указать путь для изображения в модальном окне
   // heightImg - если картинка крива показывается поменять значения
-  // linkBack - указать  ссылка для перехода на проклу
+  // linkBackPage - указать  ссылка для перехода на проклу
   // параметры на самом дне прописывать
 
-  (function (selectorForm, srcPath, heigthImg = '300', linkBack) {
-    comebacker(selectorForm, srcPath, linkBack);
+  (function (
+    selectorForm,
+    srcPath,
+    heigthImg = '300',
+    linkBackPage = localStorage.getItem('url-start-page')
+  ) {
+    comebacker(selectorForm, srcPath);
 
-    function comebacker(formSelector, linkBack) {
+    function comebacker(formSelector) {
       if (localStorage.getItem('active')) {
         localStorage.removeItem('isShown');
         return;
@@ -19,11 +24,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
       history.pushState({}, '', location.href);
 
-      let linkBack = localStorage.getItem('url-start-page') || linkBack;
-
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('isShown')) {
-          location.href = linkBack;
+          location.href = linkBackPage;
         }
 
         createModulWindow(srcPath, heigthImg);
@@ -222,6 +225,6 @@ window.addEventListener('DOMContentLoaded', function () {
     '.form-order',
     'https://funart.pro/uploads/posts/2022-06/1654756218_58-funart-pro-p-samii-malenkii-yezhik-v-mire-zhivotnie-kra-63.jpg',
     '300',
-    'https://denisgrishin.github.io/halo/'
+    'http://127.0.0.1:5500/'
   );
 });
