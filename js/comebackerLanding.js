@@ -5,17 +5,13 @@ window.addEventListener('DOMContentLoaded', function () {
   // linkBackPage - указать  ссылка для перехода на проклу
   // параметры на самом дне прописывать
 
-  (function (
-    selectorForm,
-    srcPath,
-    heigthImg = '300',
-    linkBackPage = localStorage.getItem('url-start-page')
-  ) {
+  (function (selectorForm, srcPath, heigthImg = '300', link) {
     comebacker(selectorForm, srcPath);
 
-    console.log(history.length);
     function comebacker(formSelector) {
-      history.pushState({}, '', location.href);
+      if (!localStorage.getItem('activeUserPage')) {
+        history.pushState({}, '', location.href);
+      }
 
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('activeUserPage')) {
@@ -23,7 +19,7 @@ window.addEventListener('DOMContentLoaded', function () {
           return;
         }
         if (localStorage.getItem('showModulWindLed')) {
-          location.href = linkBackPage;
+          this.location.href = link;
           return;
         }
 
@@ -172,13 +168,6 @@ window.addEventListener('DOMContentLoaded', function () {
         modul.appendChild(imgModul);
         modul.appendChild(form);
         modulBg.appendChild(style);
-        console.log(modulBg);
-        window.addEventListener('unload ', () => {
-          console.log(document.querySelector(modulBg));
-          if (modulBg) {
-            modulBg.remove();
-          }
-        });
 
         setTimeout(() => {
           showModal(modulBg, btnClose, modul);
@@ -242,5 +231,5 @@ window.addEventListener('DOMContentLoaded', function () {
     'https://denisgrishin.github.io/halo/'
   );
 });
-// 'http://127.0.0.1:5500/'
+// 'http://127.0.0.1:5500/index.html'
 // ('https://denisgrishin.github.io/halo/');

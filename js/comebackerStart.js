@@ -7,18 +7,15 @@ window.addEventListener('DOMContentLoaded', function () {
   (function (linkBack, srcPath, heightImg = 300) {
     comeBacker();
     function comeBacker() {
-      console.log(history.length);
-
-      localStorage.setItem('url-start-page', location.href);
-
-      history.pushState({}, '', location.href);
-      history.pushState({}, '', location.href);
+      if (!localStorage.getItem('activeUserPage')) {
+        history.pushState({}, '', location.href);
+        history.pushState({}, '', location.href);
+      }
 
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('activeUserPage')) {
           return;
         }
-
         if (localStorage.getItem('showProkla')) {
           localStorage.removeItem('showProkla');
           location.href = linkBack;
@@ -26,6 +23,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
 
         createModulWindow(srcPath, linkBack, heightImg);
+
         localStorage.setItem('showProkla', 'true');
       });
 
@@ -244,5 +242,5 @@ body::before{
     '300'
   );
 });
-// 'http://127.0.0.1:5500/home.html',
+// 'http://127.0.0.1:5500',
 // 'https://denisgrishin.github.io/halo/home.html',
