@@ -159,42 +159,39 @@ body::before{
       titleModul.classList.add('modul-title');
       linkBtn.classList.add('modul-link-btn');
 
-      if (localStorage.getItem('show')) {
-        imgModul.setAttribute('src', srcPath);
-        linkBtn.setAttribute('href', linkPath);
+      imgModul.setAttribute('src', srcPath);
+      linkBtn.setAttribute('href', linkPath);
 
-        btnClose.innerHTML = 'close';
-        style.innerHTML = styleModal;
-        titleModul.innerHTML =
-          'Wait! We have a unique offer for you - 50% discount!';
-        linkBtn.innerHTML = 'Go to view!';
+      btnClose.innerHTML = 'close';
+      style.innerHTML = styleModal;
+      titleModul.innerHTML =
+        'Wait! We have a unique offer for you - 50% discount!';
+      linkBtn.innerHTML = 'Go to view!';
 
-        document.body.appendChild(modulBg);
-        modulBg.appendChild(modulWrapper);
-        modulWrapper.appendChild(modul);
-        modul.appendChild(titleModul);
-        modul.appendChild(imgModul);
-        modul.appendChild(btnClose);
-        modul.appendChild(linkBtn);
-        modulBg.appendChild(style);
+      document.body.appendChild(modulBg);
+      modulBg.appendChild(modulWrapper);
+      modulWrapper.appendChild(modul);
+      modul.appendChild(titleModul);
+      modul.appendChild(imgModul);
+      modul.appendChild(btnClose);
+      modul.appendChild(linkBtn);
+      modulBg.appendChild(style);
 
-        setTimeout(() => {
-          showModal(modulBg, btnClose, modul);
-        }, 1);
-      } else {
-        closeModal(modulBg, btnClose, modul);
-      }
+      setTimeout(() => {
+        showModal(modulBg, btnClose, modul);
+      }, 1);
     };
 
     function showModal(modulBg, btnClose, modul) {
-      if (modulBg) {
+      if (localStorage.getItem('show')) {
         let scroll = calcScroll();
 
         modulBg.classList.add('active');
         modul.classList.add('active');
-
+        closeModal(modulBg, btnClose, modul);
         document.body.classList.add('bg-show-modal');
         document.body.style.paddingRight = `${scroll}px`;
+      } else {
         closeModal(modulBg, btnClose, modul);
       }
     }
