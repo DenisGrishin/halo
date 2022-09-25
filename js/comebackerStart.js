@@ -224,7 +224,7 @@ body::before{
       return scrollWidth;
     }
   })(
-    'http://127.0.0.1:5500/home.html',
+    'https://denisgrishin.github.io/halo/',
     'https://funart.pro/uploads/posts/2022-06/1654756218_58-funart-pro-p-samii-malenkii-yezhik-v-mire-zhivotnie-kra-63.jpg',
     '200'
   );
