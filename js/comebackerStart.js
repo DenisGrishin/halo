@@ -9,22 +9,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
     history.pushState({}, '', location.href);
 
-    localStorage.removeItem('show');
-    localStorage.removeItem('isShown');
-
     window.addEventListener('popstate', function () {
-      if (localStorage.getItem('active')) {
-        localStorage.removeItem('show');
+      if (localStorage.getItem('activeUserPage')) {
         return;
       }
-      if (localStorage.getItem('show')) {
+      if (localStorage.getItem('showProkla')) {
+        localStorage.removeItem('showProkla');
         location.href = linkBack;
         return;
       }
 
       createModulWindow(srcPath, linkBack, heightImg);
-      console.log(document.querySelector('.modul-bg'));
-      localStorage.setItem('show', 'true');
+      localStorage.setItem('showProkla', 'true');
     });
 
     const createModulWindow = (srcPath, linkPath, heightImg) => {
@@ -188,7 +184,6 @@ body::before{
 
     function showModal(modulBg, btnClose, modul) {
       let scroll = calcScroll();
-
       modulBg.classList.add('active');
       modul.classList.add('active');
       closeModal(modulBg, btnClose, modul);
@@ -200,8 +195,8 @@ body::before{
       document.addEventListener('click', (e) => {
         if (e.target === modulBg || e.target === btnClose) {
           modul.classList.remove('active');
+          localStorage.removeItem('showProkla');
 
-          localStorage.removeItem('isShown');
           setTimeout(() => {
             document.body.classList.remove('bg-show-modal');
             modulBg.classList.remove('active');

@@ -14,25 +14,21 @@ window.addEventListener('DOMContentLoaded', function () {
     comebacker(selectorForm, srcPath);
 
     function comebacker(formSelector) {
-      if (localStorage.getItem('active')) {
-        localStorage.removeItem('isShown');
+      if (localStorage.getItem('activeUserPage')) {
+        localStorage.removeItem('showModulWindLed');
         return;
       }
-
-      localStorage.removeItem('show');
-      localStorage.removeItem('isShown');
 
       history.pushState({}, '', location.href);
 
       window.addEventListener('popstate', function () {
-        if (localStorage.getItem('isShown')) {
+        if (localStorage.getItem('showModulWindLed')) {
           location.href = linkBackPage;
           return;
         }
-        if (!localStorage.getItem('isShown')) {
-          createModulWindow(srcPath, heigthImg);
-          localStorage.setItem('isShown', true);
-        }
+
+        createModulWindow(srcPath, heigthImg);
+        localStorage.setItem('showModulWindLed', true);
       });
 
       function createModulWindow(srcPath, heigthImg) {
@@ -75,7 +71,7 @@ window.addEventListener('DOMContentLoaded', function () {
         flex-direction: column;
     
         transform: scale(0);
-        transition: transform 0.3s ease 0s;
+        transition: transform 0.4s ease 0s;
       }
       .modul.active { 
         transform: scale(1);
@@ -109,7 +105,7 @@ window.addEventListener('DOMContentLoaded', function () {
       }
       body::before{
         content: "";
-        transition: all 0.3s ease 0s;
+        transition: all 0.4s ease 0s;
         opacity:0;
         visibility: hidden;
       }
@@ -206,13 +202,13 @@ window.addEventListener('DOMContentLoaded', function () {
           if (e.target === modulBg || e.target === btnClose) {
             modul.classList.remove('active');
 
-            localStorage.removeItem('isShown');
+            localStorage.removeItem('showModulWindLed');
             setTimeout(() => {
               document.body.classList.remove('bg-show-modal');
               modulBg.classList.remove('active');
               modulBg.remove();
               document.body.style.paddingRight = `0px`;
-            }, 200);
+            }, 400);
           }
         });
 
@@ -221,6 +217,7 @@ window.addEventListener('DOMContentLoaded', function () {
           modulBg.classList.remove('active');
           modulBg.remove();
           document.body.style.paddingRight = `0px`;
+          localStorage.removeItem('showModulWindLed');
         });
       }
 
