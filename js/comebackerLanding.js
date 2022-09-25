@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', function () {
         flex-direction: column;
     
         transform: scale(0);
-        transition: transform 0.4s ease 0s;
+        transition: transform 0.4s ease-in 0s;
       }
       .modul.active { 
         transform: scale(1);
@@ -105,7 +105,7 @@ window.addEventListener('DOMContentLoaded', function () {
       }
       body::before{
         content: "";
-        transition: all 0.4s ease 0s;
+        transition: all 0.9s ease 0s;
         opacity:0;
         visibility: hidden;
       }
@@ -208,7 +208,7 @@ window.addEventListener('DOMContentLoaded', function () {
               modulBg.classList.remove('active');
               modulBg.remove();
               document.body.style.paddingRight = `0px`;
-            }, 400);
+            }, 900);
           }
         });
 

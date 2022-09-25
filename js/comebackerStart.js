@@ -5,26 +5,29 @@ window.addEventListener('DOMContentLoaded', function () {
   // параметры на самом дне прописывать
 
   (function (linkBack, srcPath, heightImg = 300) {
-    localStorage.setItem('url-start-page', location.href);
+    comeBacker();
+    function comeBacker() {
+      localStorage.setItem('url-start-page', location.href);
 
-    history.pushState({}, '', location.href);
-
-    window.addEventListener('popstate', function () {
       if (localStorage.getItem('activeUserPage')) {
         return;
       }
-      if (localStorage.getItem('showProkla')) {
-        localStorage.removeItem('showProkla');
-        location.href = linkBack;
-        return;
-      }
 
-      createModulWindow(srcPath, linkBack, heightImg);
-      localStorage.setItem('showProkla', 'true');
-    });
+      history.pushState({}, '', location.href);
 
-    const createModulWindow = (srcPath, linkPath, heightImg) => {
-      const styleModal = `
+      window.addEventListener('popstate', function () {
+        if (localStorage.getItem('showProkla')) {
+          localStorage.removeItem('showProkla');
+          location.href = linkBack;
+          return;
+        }
+
+        createModulWindow(srcPath, linkBack, heightImg);
+        localStorage.setItem('showProkla', 'true');
+      });
+
+      const createModulWindow = (srcPath, linkPath, heightImg) => {
+        const styleModal = `
       .modul-bg {
         padding: 20px;
         width: 100%;
@@ -141,84 +144,85 @@ body::before{
     }
     `;
 
-      let style = document.createElement('style');
-      const modulBg = document.createElement('div');
-      const modulWrapper = document.createElement('div');
-      const modul = document.createElement('div');
-      const btnClose = document.createElement('button');
-      const titleModul = document.createElement('h1');
-      const imgModul = document.createElement('img');
-      const linkBtn = document.createElement('a');
+        let style = document.createElement('style');
+        const modulBg = document.createElement('div');
+        const modulWrapper = document.createElement('div');
+        const modul = document.createElement('div');
+        const btnClose = document.createElement('button');
+        const titleModul = document.createElement('h1');
+        const imgModul = document.createElement('img');
+        const linkBtn = document.createElement('a');
 
-      modulBg.classList.add('modul-bg');
-      modulWrapper.classList.add('modul-wrapper');
-      modul.classList.add('modul');
-      btnClose.classList.add('module-btn-close');
-      imgModul.classList.add('modul-img');
-      titleModul.classList.add('modul-title');
-      linkBtn.classList.add('modul-link-btn');
+        modulBg.classList.add('modul-bg');
+        modulWrapper.classList.add('modul-wrapper');
+        modul.classList.add('modul');
+        btnClose.classList.add('module-btn-close');
+        imgModul.classList.add('modul-img');
+        titleModul.classList.add('modul-title');
+        linkBtn.classList.add('modul-link-btn');
 
-      imgModul.setAttribute('src', srcPath);
-      linkBtn.setAttribute('href', linkPath);
+        imgModul.setAttribute('src', srcPath);
+        linkBtn.setAttribute('href', linkPath);
 
-      btnClose.innerHTML = 'close';
-      style.innerHTML = styleModal;
-      titleModul.innerHTML =
-        'Wait! We have a unique offer for you - 50% discount!';
-      linkBtn.innerHTML = 'Go to view!';
+        btnClose.innerHTML = 'close';
+        style.innerHTML = styleModal;
+        titleModul.innerHTML =
+          'Wait! We have a unique offer for you - 50% discount!';
+        linkBtn.innerHTML = 'Go to view!';
 
-      document.body.appendChild(modulBg);
+        document.body.appendChild(modulBg);
 
-      modulBg.appendChild(modulWrapper);
-      modulWrapper.appendChild(modul);
-      modul.appendChild(titleModul);
-      modul.appendChild(imgModul);
-      modul.appendChild(btnClose);
-      modul.appendChild(linkBtn);
-      modulBg.appendChild(style);
+        modulBg.appendChild(modulWrapper);
+        modulWrapper.appendChild(modul);
+        modul.appendChild(titleModul);
+        modul.appendChild(imgModul);
+        modul.appendChild(btnClose);
+        modul.appendChild(linkBtn);
+        modulBg.appendChild(style);
 
-      setTimeout(() => {
-        showModal(modulBg, btnClose, modul);
-      }, 1);
-    };
+        setTimeout(() => {
+          showModal(modulBg, btnClose, modul);
+        }, 1);
+      };
 
-    function showModal(modulBg, btnClose, modul) {
-      let scroll = calcScroll();
-      modulBg.classList.add('active');
-      modul.classList.add('active');
-      closeModal(modulBg, btnClose, modul);
-      document.body.classList.add('bg-show-modal');
-      document.body.style.paddingRight = `${scroll}px`;
-    }
+      function showModal(modulBg, btnClose, modul) {
+        let scroll = calcScroll();
+        modulBg.classList.add('active');
+        modul.classList.add('active');
+        closeModal(modulBg, btnClose, modul);
+        document.body.classList.add('bg-show-modal');
+        document.body.style.paddingRight = `${scroll}px`;
+      }
 
-    function closeModal(modulBg, btnClose, modul) {
-      document.addEventListener('click', (e) => {
-        if (e.target === modulBg || e.target === btnClose) {
-          modul.classList.remove('active');
-          localStorage.removeItem('showProkla');
+      function closeModal(modulBg, btnClose, modul) {
+        document.addEventListener('click', (e) => {
+          if (e.target === modulBg || e.target === btnClose) {
+            modul.classList.remove('active');
+            localStorage.removeItem('showProkla');
 
-          setTimeout(() => {
-            document.body.classList.remove('bg-show-modal');
-            modulBg.classList.remove('active');
-            modulBg.remove();
-            document.body.style.paddingRight = `0px`;
-          }, 200);
-        }
-      });
-    }
+            setTimeout(() => {
+              document.body.classList.remove('bg-show-modal');
+              modulBg.classList.remove('active');
+              modulBg.remove();
+              document.body.style.paddingRight = `0px`;
+            }, 200);
+          }
+        });
+      }
 
-    function calcScroll() {
-      let div = document.createElement('div');
-      div.style.width = '50px';
-      div.style.height = '50px';
-      div.style.overflow = 'scroll';
-      div.style.visibility = 'hidden';
+      function calcScroll() {
+        let div = document.createElement('div');
+        div.style.width = '50px';
+        div.style.height = '50px';
+        div.style.overflow = 'scroll';
+        div.style.visibility = 'hidden';
 
-      document.body.appendChild(div);
+        document.body.appendChild(div);
 
-      let scrollWidth = div.offsetWidth - div.clientWidth;
-      div.remove();
-      return scrollWidth;
+        let scrollWidth = div.offsetWidth - div.clientWidth;
+        div.remove();
+        return scrollWidth;
+      }
     }
   })(
     'http://127.0.0.1:5500/home.html',
