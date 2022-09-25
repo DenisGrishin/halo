@@ -13,7 +13,8 @@ window.addEventListener('DOMContentLoaded', function () {
     localStorage.removeItem('isShown');
 
     window.addEventListener('popstate', function () {
-      if (!localStorage.getItem('active')) {
+      if (localStorage.getItem('active')) {
+        localStorage.removeItem('show');
         return;
       }
       if (localStorage.getItem('show')) {
@@ -170,6 +171,10 @@ body::before{
       linkBtn.innerHTML = 'Go to view!';
 
       document.body.appendChild(modulBg);
+
+      if (!localStorage.getItem('show') && modulBg) {
+        modulBg.remove();
+      }
       modulBg.appendChild(modulWrapper);
       modulWrapper.appendChild(modul);
       modul.appendChild(titleModul);
