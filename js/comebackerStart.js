@@ -13,6 +13,15 @@ window.addEventListener('DOMContentLoaded', function () {
     localStorage.removeItem('isShown');
 
     window.addEventListener('popstate', function () {
+      if (
+        !localStorage.getItem('show') &&
+        document.querySelector('.modul-bg')
+      ) {
+        localStorage.removeItem('show');
+        modulBg.remove();
+        return;
+      }
+
       if (localStorage.getItem('active')) {
         localStorage.removeItem('show');
         return;
@@ -142,7 +151,7 @@ body::before{
       opacity:0.5;
       background-color: rgba(0, 0, 0, 1);
     }
-`;
+    `;
 
       let style = document.createElement('style');
       const modulBg = document.createElement('div');
@@ -172,10 +181,6 @@ body::before{
 
       document.body.appendChild(modulBg);
 
-      if (!localStorage.getItem('show') && modulBg) {
-        localStorage.removeItem('show');
-        modulBg.remove();
-      }
       modulBg.appendChild(modulWrapper);
       modulWrapper.appendChild(modul);
       modul.appendChild(titleModul);
@@ -234,3 +239,4 @@ body::before{
     '300'
   );
 });
+// 'http://127.0.0.1:5500/home.html',

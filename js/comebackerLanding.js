@@ -228,3 +228,4 @@ window.addEventListener('DOMContentLoaded', function () {
     'https://denisgrishin.github.io/halo/'
   );
 });
+// 'http://127.0.0.1:5500/'
