@@ -14,13 +14,13 @@ window.addEventListener('DOMContentLoaded', function () {
     comebacker(selectorForm, srcPath);
 
     function comebacker(formSelector) {
-      window.addEventListener('load', () => {
-        if (document.querySelector('.modul-bg')) {
-          console.log(document.querySelector('.modul-bg'));
-          document.querySelector('.modul-bg').remove();
-        }
-      });
       if (localStorage.getItem('active')) {
+        window.addEventListener('load', () => {
+          console.log(document.querySelector('.modul-bg'));
+          if (document.querySelector('.modul-bg')) {
+            // document.querySelector('.modul-bg').remove();
+          }
+        });
         localStorage.removeItem('isShown');
         return;
       }
