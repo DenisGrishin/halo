@@ -13,11 +13,12 @@ window.addEventListener('DOMContentLoaded', function () {
       localStorage.setItem('url-start-page', location.href);
 
       history.pushState({}, '', location.href);
+      history.pushState({}, '', location.href);
 
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('showProkla')) {
-          location.href = linkBack;
           localStorage.removeItem('showProkla');
+          location.href = linkBack;
           return;
         }
 
