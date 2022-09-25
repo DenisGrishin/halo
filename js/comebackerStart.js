@@ -12,16 +12,11 @@ window.addEventListener('DOMContentLoaded', function () {
     localStorage.removeItem('show');
     localStorage.removeItem('isShown');
 
+    if (!localStorage.getItem('show') && document.querySelector('.modul-bg')) {
+      localStorage.removeItem('show');
+      document.querySelector('.modul-bg').remove();
+    }
     window.addEventListener('popstate', function () {
-      if (
-        !localStorage.getItem('show') &&
-        document.querySelector('.modul-bg')
-      ) {
-        localStorage.removeItem('show');
-        modulBg.remove();
-        return;
-      }
-
       if (localStorage.getItem('active')) {
         localStorage.removeItem('show');
         return;
