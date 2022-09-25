@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function comebacker(formSelector) {
       if (localStorage.getItem('activeUserPage')) {
-        localStorage.removeItem('showModulWindLed');
+        location.removeItem('showModulWindLed');
         return;
       }
 

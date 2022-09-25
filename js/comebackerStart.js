@@ -7,18 +7,17 @@ window.addEventListener('DOMContentLoaded', function () {
   (function (linkBack, srcPath, heightImg = 300) {
     comeBacker();
     function comeBacker() {
-      localStorage.setItem('url-start-page', location.href);
-
       if (localStorage.getItem('activeUserPage')) {
         return;
       }
+      localStorage.setItem('url-start-page', location.href);
 
       history.pushState({}, '', location.href);
 
       window.addEventListener('popstate', function () {
         if (localStorage.getItem('showProkla')) {
-          localStorage.removeItem('showProkla');
           location.href = linkBack;
+          localStorage.removeItem('showProkla');
           return;
         }
 
@@ -125,7 +124,7 @@ body {
 
 body::before{
       content: "";
-      transition: all 0.3s ease 0s;
+      transition: all 0.2s ease 0s;
       opacity:0;
       visibility: hidden;
     }
@@ -196,7 +195,11 @@ body::before{
 
       function closeModal(modulBg, btnClose, modul) {
         document.addEventListener('click', (e) => {
-          if (e.target === modulBg || e.target === btnClose) {
+          if (
+            e.target === modulBg ||
+            e.target === btnClose ||
+            e.target === document.querySelector('.modul-link-btn')
+          ) {
             modul.classList.remove('active');
             localStorage.removeItem('showProkla');
 
