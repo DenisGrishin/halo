@@ -215,6 +215,13 @@ window.addEventListener('DOMContentLoaded', function () {
             }, 200);
           }
         });
+
+        window.addEventListener('unload', function () {
+          document.body.classList.remove('bg-show-modal');
+          modulBg.classList.remove('active');
+          modulBg.remove();
+          document.body.style.paddingRight = `0px`;
+        });
       }
 
       function calcScroll() {
@@ -238,4 +245,4 @@ window.addEventListener('DOMContentLoaded', function () {
     'http://127.0.0.1:5500/'
   );
 });
-('https://denisgrishin.github.io/halo/');
+// ('https://denisgrishin.github.io/halo/');
