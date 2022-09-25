@@ -15,10 +15,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function comebacker(formSelector) {
       if (localStorage.getItem('active')) {
-        window.addEventListener('load', () => {
-          console.log(document.querySelector('.modul-bg'));
+        window.addEventListener('unload ', () => {
           if (document.querySelector('.modul-bg')) {
-            // document.querySelector('.modul-bg').remove();
+            document.querySelector('.modul-bg').remove();
           }
         });
         localStorage.removeItem('isShown');
