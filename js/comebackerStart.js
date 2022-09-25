@@ -7,15 +7,16 @@ window.addEventListener('DOMContentLoaded', function () {
   (function (linkBack, srcPath, heightImg = 300) {
     comeBacker();
     function comeBacker() {
-      if (localStorage.getItem('activeUserPage')) {
-        return;
-      }
       localStorage.setItem('url-start-page', location.href);
 
       history.pushState({}, '', location.href);
       history.pushState({}, '', location.href);
 
       window.addEventListener('popstate', function () {
+        if (localStorage.getItem('activeUserPage')) {
+          return;
+        }
+
         if (localStorage.getItem('showProkla')) {
           localStorage.removeItem('showProkla');
           location.href = linkBack;
@@ -107,7 +108,7 @@ background-image: -webkit-linear-gradient(45deg, #fff 50%, transparent 50%), 100
 background-image: linear-gradient(45deg, #fff 50%, transparent 50%);
 background-position: 100%;
 background-size: 400%;
-transition: all 0.3s ease-in-out 0s;
+transition: all 0.4s ease-in-out 0s;
 }
 
 @media (any-hover: hover) {
@@ -125,7 +126,7 @@ body {
 
 body::before{
       content: "";
-      transition: all 0.1s ease 0s;
+      transition: all 0.4s ease 0s;
       opacity:0;
       visibility: hidden;
     }

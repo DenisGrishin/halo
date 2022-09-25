@@ -14,14 +14,13 @@ window.addEventListener('DOMContentLoaded', function () {
     comebacker(selectorForm, srcPath);
 
     function comebacker(formSelector) {
-      if (localStorage.getItem('activeUserPage')) {
-        location.removeItem('showModulWindLed');
-        return;
-      }
-
       history.pushState({}, '', location.href);
 
       window.addEventListener('popstate', function () {
+        if (localStorage.getItem('activeUserPage')) {
+          location.removeItem('showModulWindLed');
+          return;
+        }
         if (localStorage.getItem('showModulWindLed')) {
           location.href = linkBackPage;
           return;
@@ -105,7 +104,7 @@ window.addEventListener('DOMContentLoaded', function () {
       }
       body::before{
         content: "";
-        transition: all 0.9s ease 0s;
+        transition: all 0.4s ease 0s;
         opacity:0;
         visibility: hidden;
       }
@@ -208,7 +207,7 @@ window.addEventListener('DOMContentLoaded', function () {
               modulBg.classList.remove('active');
               modulBg.remove();
               document.body.style.paddingRight = `0px`;
-            }, 900);
+            }, 300);
           }
         });
 
