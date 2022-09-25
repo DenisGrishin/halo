@@ -13,9 +13,13 @@ window.addEventListener('DOMContentLoaded', function () {
   ) {
     comebacker(selectorForm, srcPath);
 
+    window.addEventListener('load', () => {
+      if (document.querySelector('.modul-bg'))
+        document.querySelector('.modul-bg').remove();
+    });
+
     function comebacker(formSelector) {
       if (localStorage.getItem('active')) {
-        document.querySelector('.modul-bg').remove();
         localStorage.removeItem('isShown');
         return;
       }
