@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', function () {
   ) {
     comebacker(selectorForm, srcPath);
 
+    console.log(history.length);
     function comebacker(formSelector) {
       history.pushState({}, '', location.href);
 

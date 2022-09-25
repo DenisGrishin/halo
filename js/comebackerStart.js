@@ -7,6 +7,8 @@ window.addEventListener('DOMContentLoaded', function () {
   (function (linkBack, srcPath, heightImg = 300) {
     comeBacker();
     function comeBacker() {
+      console.log(history.length);
+
       localStorage.setItem('url-start-page', location.href);
 
       history.pushState({}, '', location.href);
